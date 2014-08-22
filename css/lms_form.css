@@ -1,0 +1,19 @@
+html.js input.form-autocomplete {
+	width: 100%;
+}
+
+input[name='field_lms_copy_sub_collection_add_more'] {
+	display: none;
+}
+
+form#lms-survey-node-form div.field-group-div {
+	border: 1px solid #dddddd;
+	padding: 5px;
+	margin-bottom: 20px;
+}
+
+/* Override rubik css */
+form#lms-survey-node-form .form-item label {
+	text-transform: none;
+	font-size: 11px;
+}

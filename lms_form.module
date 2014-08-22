@@ -1,0 +1,8 @@
+<?php
+/**
+ * @file
+ * Code for the lms_form feature.
+ */
+
+include_once 'lms_form.features.inc';
+include_once 'lms_form.module.inc';
