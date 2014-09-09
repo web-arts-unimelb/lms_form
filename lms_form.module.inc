@@ -162,6 +162,10 @@ function lms_form_url_inbound_alter(&$path, $original_path, $path_language)
 {
 	global $user;	
 
+	// https://www.drupal.org/files/1291536-4.patch
+	// Detect cron
+	// It seems updating this php file, can allow award import to proceed?
+
 	// It seems when batch is running, all urls will be scanned.
 	if(preg_match('|^node/add/lms-survey(/.*)?|', $path, $matches)) {
 		if(_does_user_complete_survey_is_admin($user->name)) {
