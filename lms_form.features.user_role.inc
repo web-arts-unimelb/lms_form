@@ -13,7 +13,7 @@ function lms_form_user_default_roles() {
   // Exported role: staff.
   $roles['staff'] = array(
     'name' => 'staff',
-    'weight' => '3',
+    'weight' => '7',
   );
 
   return $roles;

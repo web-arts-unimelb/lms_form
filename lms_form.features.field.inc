@@ -41,6 +41,8 @@ function lms_form_field_default_fields() {
     ),
     'field_instance' => array(
       'bundle' => 'field_lms_cohort_collection',
+      'custom_add_another' => '',
+      'custom_remove' => '',
       'default_value' => NULL,
       'deleted' => '0',
       'description' => '',
@@ -57,7 +59,7 @@ function lms_form_field_default_fields() {
       ),
       'entity_type' => 'field_collection_item',
       'field_name' => 'field_lms_cohort_subject',
-      'label' => 'Cohort linked subject',
+      'label' => 'Subject',
       'required' => 0,
       'settings' => array(
         'better_formats' => array(
@@ -65,6 +67,7 @@ function lms_form_field_default_fields() {
             'complete_full_html' => 'complete_full_html',
             'filtered_html' => 'filtered_html',
             'full_html' => 'full_html',
+            'php_code' => 0,
             'plain_text' => 'plain_text',
           ),
           'allowed_formats_toggle' => 0,
@@ -80,12 +83,17 @@ function lms_form_field_default_fields() {
               'full_html' => array(
                 'weight' => '0',
               ),
+              'php_code' => array(
+                'weight' => '11',
+              ),
               'plain_text' => array(
                 'weight' => '10',
               ),
             ),
           ),
         ),
+        'custom_add_another' => '',
+        'custom_remove' => '',
         'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
@@ -1595,14 +1603,14 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
     ),
   );
 
-  // Exported field: 'field_collection_item-field_lms_copy_sub_collection-field_lms_copy_course_code'.
-  $fields['field_collection_item-field_lms_copy_sub_collection-field_lms_copy_course_code'] = array(
+  // Exported field: 'field_collection_item-field_lms_copy_sub_collection-field_lms_copy_abb'.
+  $fields['field_collection_item-field_lms_copy_sub_collection-field_lms_copy_abb'] = array(
     'field_config' => array(
       'active' => '1',
       'cardinality' => '1',
       'deleted' => '0',
       'entity_types' => array(),
-      'field_name' => 'field_lms_copy_course_code',
+      'field_name' => 'field_lms_copy_abb',
       'foreign keys' => array(
         'format' => array(
           'columns' => array(
@@ -1626,6 +1634,8 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
     ),
     'field_instance' => array(
       'bundle' => 'field_lms_copy_sub_collection',
+      'custom_add_another' => '',
+      'custom_remove' => '',
       'default_value' => NULL,
       'deleted' => '0',
       'description' => '',
@@ -1637,19 +1647,20 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
             'field_formatter_class' => '',
           ),
           'type' => 'text_default',
-          'weight' => 0,
+          'weight' => 3,
         ),
       ),
       'entity_type' => 'field_collection_item',
-      'field_name' => 'field_lms_copy_course_code',
-      'label' => 'Course code',
-      'required' => 1,
+      'field_name' => 'field_lms_copy_abb',
+      'label' => 'Abbreviation',
+      'required' => 0,
       'settings' => array(
         'better_formats' => array(
           'allowed_formats' => array(
             'complete_full_html' => 'complete_full_html',
             'filtered_html' => 'filtered_html',
             'full_html' => 'full_html',
+            'php_code' => 'php_code',
             'plain_text' => 'plain_text',
           ),
           'allowed_formats_toggle' => 0,
@@ -1665,12 +1676,17 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
               'full_html' => array(
                 'weight' => '0',
               ),
+              'php_code' => array(
+                'weight' => '11',
+              ),
               'plain_text' => array(
                 'weight' => '10',
               ),
             ),
           ),
         ),
+        'custom_add_another' => '',
+        'custom_remove' => '',
         'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
@@ -1686,6 +1702,105 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
     ),
   );
 
+  // Exported field: 'field_collection_item-field_lms_copy_sub_collection-field_lms_copy_num'.
+  $fields['field_collection_item-field_lms_copy_sub_collection-field_lms_copy_num'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_lms_copy_num',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'text',
+      'settings' => array(
+        'max_length' => '255',
+      ),
+      'translatable' => '0',
+      'type' => 'text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'field_lms_copy_sub_collection',
+      'custom_add_another' => '',
+      'custom_remove' => '',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(
+            'field_formatter_class' => '',
+          ),
+          'type' => 'text_default',
+          'weight' => 4,
+        ),
+      ),
+      'entity_type' => 'field_collection_item',
+      'field_name' => 'field_lms_copy_num',
+      'label' => 'Number',
+      'required' => 0,
+      'settings' => array(
+        'better_formats' => array(
+          'allowed_formats' => array(
+            'complete_full_html' => 'complete_full_html',
+            'filtered_html' => 'filtered_html',
+            'full_html' => 'full_html',
+            'php_code' => 'php_code',
+            'plain_text' => 'plain_text',
+          ),
+          'allowed_formats_toggle' => 0,
+          'default_order_toggle' => 0,
+          'default_order_wrapper' => array(
+            'formats' => array(
+              'complete_full_html' => array(
+                'weight' => '0',
+              ),
+              'filtered_html' => array(
+                'weight' => '0',
+              ),
+              'full_html' => array(
+                'weight' => '0',
+              ),
+              'php_code' => array(
+                'weight' => '11',
+              ),
+              'plain_text' => array(
+                'weight' => '10',
+              ),
+            ),
+          ),
+        ),
+        'custom_add_another' => '',
+        'custom_remove' => '',
+        'text_processing' => '0',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'size' => '60',
+        ),
+        'type' => 'text_textfield',
+        'weight' => '2',
+      ),
+    ),
+  );
+
   // Exported field: 'field_collection_item-field_lms_copy_sub_collection-field_lms_copy_study_period'.
   $fields['field_collection_item-field_lms_copy_sub_collection-field_lms_copy_study_period'] = array(
     'field_config' => array(
@@ -1694,54 +1809,50 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_lms_copy_study_period',
-      'foreign keys' => array(),
+      'foreign keys' => array(
+        'tid' => array(
+          'columns' => array(
+            'tid' => 'tid',
+          ),
+          'table' => 'taxonomy_term_data',
+        ),
+      ),
       'indexes' => array(
-        'value' => array(
-          0 => 'value',
+        'tid' => array(
+          0 => 'tid',
         ),
       ),
       'locked' => '0',
-      'module' => 'list',
+      'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
-          'JAN' => 'JAN',
-          'FEB' => 'FEB',
-          'MAR' => 'MAR',
-          'APR' => 'APR',
-          'MAY' => 'MAY',
-          'JUN' => 'JUN',
-          'SM1' => 'SM1',
-          'WIN' => 'WIN',
-          'RS1' => 'RS1',
-          'JUL' => 'JUL',
-          'AUG' => 'AUG',
-          'SEP' => 'SEP',
-          'OCT' => 'OCT',
-          'NOV' => 'NOV',
-          'SM2' => 'SM2',
-          'SUM' => 'SUM',
-          'SUMI' => 'SUMI',
-          'RS2' => 'RS2',
+          0 => array(
+            'vocabulary' => 'study_period',
+            'parent' => '0',
+            'depth' => '',
+          ),
         ),
-        'allowed_values_function' => '',
+        'options_list_callback' => 'content_taxonomy_allowed_values',
       ),
       'translatable' => '0',
-      'type' => 'list_text',
+      'type' => 'taxonomy_term_reference',
     ),
     'field_instance' => array(
       'bundle' => 'field_lms_copy_sub_collection',
+      'custom_add_another' => '',
+      'custom_remove' => '',
       'default_value' => NULL,
       'deleted' => '0',
       'description' => '',
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'list',
+          'module' => 'taxonomy',
           'settings' => array(
             'field_formatter_class' => '',
           ),
-          'type' => 'list_default',
-          'weight' => 1,
+          'type' => 'taxonomy_term_reference_link',
+          'weight' => 5,
         ),
       ),
       'entity_type' => 'field_collection_item',
@@ -1749,16 +1860,18 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       'label' => 'Study period',
       'required' => 1,
       'settings' => array(
+        'custom_add_another' => '',
+        'custom_remove' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
         'active' => 1,
         'module' => 'options',
         'settings' => array(
-          'content_taxonomy_opt_groups' => FALSE,
+          'content_taxonomy_opt_groups' => 0,
         ),
         'type' => 'options_select',
-        'weight' => '3',
+        'weight' => '6',
       ),
     ),
   );
@@ -1785,6 +1898,7 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
           2012 => '2012',
           2013 => '2013',
           2014 => '2014',
+          2015 => '2015',
         ),
         'allowed_values_function' => '',
         'allowed_values_php' => '',
@@ -1794,7 +1908,11 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
     ),
     'field_instance' => array(
       'bundle' => 'field_lms_copy_sub_collection',
+      'custom_add_another' => '',
+      'custom_remove' => '',
       'default_value' => NULL,
+      'default_value_function' => '',
+      'default_value_php' => '',
       'deleted' => '0',
       'description' => '',
       'display' => array(
@@ -1813,6 +1931,8 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       'label' => 'Year',
       'required' => 1,
       'settings' => array(
+        'custom_add_another' => '',
+        'custom_remove' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -1822,7 +1942,7 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
           'content_taxonomy_opt_groups' => FALSE,
         ),
         'type' => 'options_select',
-        'weight' => '2',
+        'weight' => '3',
       ),
     ),
   );
@@ -1864,6 +1984,8 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       'label' => 'Email',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
+        'custom_remove' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -1934,6 +2056,8 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       'label' => 'Name',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
+        'custom_remove' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -2007,6 +2131,8 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       'label' => 'Role',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
+        'custom_remove' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -2083,6 +2209,8 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       'label' => ' What are your top 5 priority areas for eTeaching professional development?',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
+        'custom_remove' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -2175,6 +2303,8 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
             ),
           ),
         ),
+        'custom_add_another' => '',
+        'custom_remove' => '',
         'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
@@ -2244,6 +2374,8 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       'label' => 'What is your preferred format for eTeaching professional development?',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
+        'custom_remove' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -2312,6 +2444,8 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       'label' => 'When do you prefer training?',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
+        'custom_remove' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -2382,6 +2516,8 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       'label' => 'Would you like to make better use of collecting data in your LMS subject site for items within (and external to) the LMS?',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
+        'custom_remove' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -2451,6 +2587,8 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       'label' => 'Would you like more information about:',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
+        'custom_remove' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -2519,6 +2657,8 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       'label' => 'Would you like further information or a one-on-one session on using Turnitin, marking online and collating results in the GradeCentre?',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
+        'custom_remove' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -2579,6 +2719,8 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       'label' => 'Notice',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
+        'custom_remove' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -2647,6 +2789,8 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       'label' => 'Do you give feedback to students online via the LMS?',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
+        'custom_remove' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -2739,6 +2883,8 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
             ),
           ),
         ),
+        'custom_add_another' => '',
+        'custom_remove' => '',
         'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
@@ -2810,6 +2956,8 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       'label' => 'Do you enable statistics tracking on items in your LMS subject site?',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
+        'custom_remove' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -2878,6 +3026,8 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       'label' => 'Do your students submit their assessment via Turnitin?',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
+        'custom_remove' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -2915,9 +3065,18 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
     ),
     'field_instance' => array(
       'bundle' => 'lmsform',
+      'custom_add_another' => '',
+      'custom_remove' => '',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => '',
+      'description' => 'If your cohort linked subject(s) are not able to be found in this search box, please type it like this: "ABCD00000_YEAR _PERIOD - Full Subject Title" You can find all the information about the <i>Subject Code</i>, <i>Year</i>, <i>Study Period</i> and <i>Full Title</i> at these various sites:
+<ul>
+<li><a href="http://lms.unimelb.edu.au/login" target="_blank">LMS</a></li>
+<li><a href="http://handbook.unimelb.edu.au" target="_blank">Handbook</a></li>
+<li><a href="http://isis.unimelb.edu.au" target="_blank">ISIS</a></li>
+<li><a href="http://arts.unimelb.edu.au/schools" target="_blank">Schools</a></li>
+<li><a href="https://app.lms.unimelb.edu.au/bbcswebdav/institution/catalogue/index.html" target="_blank">Subject catalogue</a></li>
+</ul>',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -2946,6 +3105,8 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       'label' => 'Cohort',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
+        'custom_remove' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -2953,6 +3114,69 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
         'module' => 'field_collection_table',
         'settings' => array(),
         'type' => 'field_collection_table',
+        'weight' => '10',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-lmsform-field_lms_cohort_label'.
+  $fields['node-lmsform-field_lms_cohort_label'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_lms_cohort_label',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'locked' => '0',
+      'module' => 'markup',
+      'settings' => array(
+        'markup' => array(
+          'format' => 'complete_full_html',
+          'value' => '<div class="form-item"><label>Linked subject code and subject name (just start typing to search). You can add multiple cohort linked subjects</label></div>',
+        ),
+      ),
+      'translatable' => '0',
+      'type' => 'markup',
+    ),
+    'field_instance' => array(
+      'bundle' => 'lmsform',
+      'custom_add_another' => '',
+      'custom_remove' => '',
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'markup',
+          'settings' => array(
+            'field_formatter_class' => '',
+          ),
+          'type' => 'markup_default',
+          'weight' => 31,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_lms_cohort_label',
+      'label' => 'Cohort label',
+      'required' => 0,
+      'settings' => array(
+        'custom_add_another' => '',
+        'custom_remove' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'markup',
+        'settings' => array(),
+        'type' => 'markup',
         'weight' => '9',
       ),
     ),
@@ -2991,7 +3215,7 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       'default_value_function' => '',
       'default_value_php' => '',
       'deleted' => '0',
-      'description' => '',
+      'description' => 'This is called <a href="http://lms.unimelb.edu.au/start/nominations">cohort linking</a>',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -3011,9 +3235,11 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       ),
       'entity_type' => 'node',
       'field_name' => 'field_lms_cohort_or_not',
-      'label' => 'Add linked cohort subject',
+      'label' => 'Are you intending to teach two or more subjects (i.e. groups of students), through this LMS site?',
       'required' => 1,
       'settings' => array(
+        'custom_add_another' => '',
+        'custom_remove' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -3022,6 +3248,69 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
         'settings' => array(),
         'type' => 'options_buttons',
         'weight' => '8',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-lmsform-field_lms_copy_label'.
+  $fields['node-lmsform-field_lms_copy_label'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_lms_copy_label',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'locked' => '0',
+      'module' => 'markup',
+      'settings' => array(
+        'markup' => array(
+          'format' => 'complete_full_html',
+          'value' => '<div class="form-item"><label>Copy forward this subject\'s content.  (The subject\'s code must written as 4 letters and 5 numbers for example ABCD10030_2014_SM2)</label></div>',
+        ),
+      ),
+      'translatable' => '0',
+      'type' => 'markup',
+    ),
+    'field_instance' => array(
+      'bundle' => 'lmsform',
+      'custom_add_another' => '',
+      'custom_remove' => '',
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'markup',
+          'settings' => array(
+            'field_formatter_class' => '',
+          ),
+          'type' => 'markup_default',
+          'weight' => 32,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_lms_copy_label',
+      'label' => 'Copy label',
+      'required' => 0,
+      'settings' => array(
+        'custom_add_another' => '',
+        'custom_remove' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'markup',
+        'settings' => array(),
+        'type' => 'markup',
+        'weight' => '12',
       ),
     ),
   );
@@ -3051,9 +3340,16 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
     ),
     'field_instance' => array(
       'bundle' => 'lmsform',
+      'custom_add_another' => '',
+      'custom_remove' => '',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => '',
+      'description' => 'The subject you are copying from must exist and have content, please double-check
+<ul>
+<li><a href="http://lms.unimelb.edu.au/login" target="_blank">LMS</a></li>
+<li><a href="http://isis.unimelb.edu.au" target="_blank">ISIS</a></li>
+<li><a href="https://app.lms.unimelb.edu.au/bbcswebdav/institution/catalogue/index.html" target="_blank">Subject catalogue</a></li>
+</ul>',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -3082,6 +3378,8 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       'label' => 'Copy',
       'required' => 1,
       'settings' => array(
+        'custom_add_another' => '',
+        'custom_remove' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -3089,7 +3387,7 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
         'module' => 'field_collection_table',
         'settings' => array(),
         'type' => 'field_collection_table',
-        'weight' => '11',
+        'weight' => '13',
       ),
     ),
   );
@@ -3150,6 +3448,8 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       'label' => 'All subject codes, subject names, years and study periods are correct',
       'required' => 1,
       'settings' => array(
+        'custom_add_another' => '',
+        'custom_remove' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -3157,7 +3457,7 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '12',
+        'weight' => '14',
       ),
     ),
   );
@@ -3244,6 +3544,8 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
             ),
           ),
         ),
+        'custom_add_another' => '',
+        'custom_remove' => '',
         'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
@@ -3277,10 +3579,11 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       'module' => 'list',
       'settings' => array(
         'allowed_values' => array(
-          'create_new' => 'Create a new LMS site from the Arts Faculty template',
-          'copy_forward' => 'Copy content forward from an older LMS site',
+          'create_new' => 'Create a new site based on the Arts template. (also called and empty site or a manual copy site)',
+          'copy_forward' => 'Copy forward from previous LMS version of the subject. (also called rolling over or duplicating previous site)',
         ),
         'allowed_values_function' => '',
+        'allowed_values_php' => '',
         'multivalue_settings' => array(
           'allowed' => '2',
           'enable' => 0,
@@ -3294,7 +3597,11 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
     ),
     'field_instance' => array(
       'bundle' => 'lmsform',
+      'custom_add_another' => '',
+      'custom_remove' => '',
       'default_value' => NULL,
+      'default_value_function' => '',
+      'default_value_php' => '',
       'deleted' => '0',
       'description' => '',
       'display' => array(
@@ -3316,9 +3623,11 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       ),
       'entity_type' => 'node',
       'field_name' => 'field_lms_how_create',
-      'label' => 'How would you like to create your subject?',
+      'label' => 'How would you like to your subject to be created and filled with content?',
       'required' => 1,
       'settings' => array(
+        'custom_add_another' => '',
+        'custom_remove' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -3326,7 +3635,7 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '10',
+        'weight' => '11',
       ),
     ),
   );
@@ -3411,6 +3720,8 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
             ),
           ),
         ),
+        'custom_add_another' => '',
+        'custom_remove' => '',
         'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
@@ -3421,7 +3732,7 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
           'rows' => '5',
         ),
         'type' => 'text_textarea',
-        'weight' => '14',
+        'weight' => '16',
       ),
     ),
   );
@@ -3475,6 +3786,8 @@ Please nominate your subjects for the Learning Management System (LMS). You will
       'label' => 'Notice',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
+        'custom_remove' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -3569,6 +3882,8 @@ Please nominate your subjects for the Learning Management System (LMS). You will
             ),
           ),
         ),
+        'custom_add_another' => '',
+        'custom_remove' => '',
         'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
@@ -3617,7 +3932,14 @@ Please nominate your subjects for the Learning Management System (LMS). You will
       'bundle' => 'lmsform',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => 'If your subject is not listed, please contact <a href="mailto:mitch.buzza@unimelb.edu.au">Mitch Buzza</a>.',
+      'description' => 'If your subject is not able to be found in this search box, please type it like this: "ABCD00000_YEAR _PERIOD - Full Subject Title" You can find all the information about the <i>Subject Code</i>, <i>Year</i>, <i>Study Period</i> and <i>Full Title</i> at these various sites:
+<ul>
+<li><a href="http://lms.unimelb.edu.au/login" target="_blank">LMS</a></li>
+<li><a href="http://handbook.unimelb.edu.au" target="_blank">Handbook</a></li>
+<li><a href="http://isis.unimelb.edu.au" target="_blank">ISIS</a></li>
+<li><a href="http://arts.unimelb.edu.au/schools" target="_blank">Schools</a></li>
+<li><a href="https://app.lms.unimelb.edu.au/bbcswebdav/institution/catalogue/index.html" target="_blank">Subject catalogue</a></li>
+</ul>',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -3637,7 +3959,7 @@ Please nominate your subjects for the Learning Management System (LMS). You will
       ),
       'entity_type' => 'node',
       'field_name' => 'field_lms_primary_subject',
-      'label' => 'Primary subject',
+      'label' => 'Subject Code and Subject Name (just start typing to search)',
       'required' => 1,
       'settings' => array(
         'better_formats' => array(
@@ -3645,6 +3967,7 @@ Please nominate your subjects for the Learning Management System (LMS). You will
             'complete_full_html' => 'complete_full_html',
             'filtered_html' => 'filtered_html',
             'full_html' => 'full_html',
+            'php_code' => 0,
             'plain_text' => 'plain_text',
           ),
           'allowed_formats_toggle' => 0,
@@ -3660,12 +3983,17 @@ Please nominate your subjects for the Learning Management System (LMS). You will
               'full_html' => array(
                 'weight' => '0',
               ),
+              'php_code' => array(
+                'weight' => '11',
+              ),
               'plain_text' => array(
                 'weight' => '10',
               ),
             ),
           ),
         ),
+        'custom_add_another' => '',
+        'custom_remove' => '',
         'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
@@ -5231,6 +5559,8 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       'label' => 'Staff',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
+        'custom_remove' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -5238,7 +5568,7 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
         'module' => 'field_collection_table',
         'settings' => array(),
         'type' => 'field_collection_table',
-        'weight' => '13',
+        'weight' => '15',
       ),
     ),
   );
@@ -5286,6 +5616,8 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       'label' => 'Uni email',
       'required' => 1,
       'settings' => array(
+        'custom_add_another' => '',
+        'custom_remove' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -5303,12 +5635,13 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
   // Translatables
   // Included for use with string extractors like potx.
   t(' What are your top 5 priority areas for eTeaching professional development?');
-  t('Add linked cohort subject');
+  t('Abbreviation');
   t('All subject codes, subject names, years and study periods are correct');
+  t('Are you intending to teach two or more subjects (i.e. groups of students), through this LMS site?');
   t('Cohort');
-  t('Cohort linked subject');
+  t('Cohort label');
   t('Copy');
-  t('Course code');
+  t('Copy label');
   t('Do you enable statistics tracking on items in your LMS subject site?');
   t('Do you give feedback to students online via the LMS?');
   t('Do you have other any eTeaching requirements or training needs?');
@@ -5316,16 +5649,40 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
   t('Do your students submit their assessment via Turnitin?');
   t('Email');
   t('Full name');
-  t('How would you like to create your subject?');
-  t('If your subject is not listed, please contact <a href="mailto:mitch.buzza@unimelb.edu.au">Mitch Buzza</a>.');
+  t('How would you like to your subject to be created and filled with content?');
+  t('If your cohort linked subject(s) are not able to be found in this search box, please type it like this: "ABCD00000_YEAR _PERIOD - Full Subject Title" You can find all the information about the <i>Subject Code</i>, <i>Year</i>, <i>Study Period</i> and <i>Full Title</i> at these various sites:
+<ul>
+<li><a href="http://lms.unimelb.edu.au/login" target="_blank">LMS</a></li>
+<li><a href="http://handbook.unimelb.edu.au" target="_blank">Handbook</a></li>
+<li><a href="http://isis.unimelb.edu.au" target="_blank">ISIS</a></li>
+<li><a href="http://arts.unimelb.edu.au/schools" target="_blank">Schools</a></li>
+<li><a href="https://app.lms.unimelb.edu.au/bbcswebdav/institution/catalogue/index.html" target="_blank">Subject catalogue</a></li>
+</ul>');
+  t('If your subject is not able to be found in this search box, please type it like this: "ABCD00000_YEAR _PERIOD - Full Subject Title" You can find all the information about the <i>Subject Code</i>, <i>Year</i>, <i>Study Period</i> and <i>Full Title</i> at these various sites:
+<ul>
+<li><a href="http://lms.unimelb.edu.au/login" target="_blank">LMS</a></li>
+<li><a href="http://handbook.unimelb.edu.au" target="_blank">Handbook</a></li>
+<li><a href="http://isis.unimelb.edu.au" target="_blank">ISIS</a></li>
+<li><a href="http://arts.unimelb.edu.au/schools" target="_blank">Schools</a></li>
+<li><a href="https://app.lms.unimelb.edu.au/bbcswebdav/institution/catalogue/index.html" target="_blank">Subject catalogue</a></li>
+</ul>');
   t('Name');
   t('Note');
   t('Notice');
+  t('Number');
   t('Phone');
-  t('Primary subject');
   t('Role');
   t('Staff');
   t('Study period');
+  t('Subject');
+  t('Subject Code and Subject Name (just start typing to search)');
+  t('The subject you are copying from must exist and have content, please double-check
+<ul>
+<li><a href="http://lms.unimelb.edu.au/login" target="_blank">LMS</a></li>
+<li><a href="http://isis.unimelb.edu.au" target="_blank">ISIS</a></li>
+<li><a href="https://app.lms.unimelb.edu.au/bbcswebdav/institution/catalogue/index.html" target="_blank">Subject catalogue</a></li>
+</ul>');
+  t('This is called <a href="http://lms.unimelb.edu.au/start/nominations">cohort linking</a>');
   t('Uni email');
   t('What is your preferred format for eTeaching professional development?');
   t('When do you prefer training?');
