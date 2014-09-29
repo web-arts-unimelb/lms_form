@@ -287,15 +287,26 @@ function _validate_staff_collection($form, &$form_state) {
 
 // Validate
 function _validate_course_code($form, &$form_state) {
-	foreach($form_state['input']['field_lms_copy_sub_collection']['und'] as $field_set) {
-		$course_code = $field_set['field_lms_copy_course_code']['und']['0']['value'];	
-		$pattern = "/^[A-Z]{4}[0-9]{5}$/";
-		
-		if(preg_match($pattern, $course_code)) {
+	$lang = LANGUAGE_NONE;
+
+	foreach($form_state['input']['field_lms_copy_sub_collection'][$lang] as $field_set) {
+		$course_letter = $field_set['field_lms_copy_abb'][$lang]['0']['value'];
+		$course_num = $field_set['field_lms_copy_num'][$lang]['0']['value'];
+
+		$letter_pattern = "/^[A-Z]{4}$/";
+		$num_pattern = "/^[0-9]{5}$/";		
+
+		if(
+			empty($course_letter) &&
+      empty($course_num)
+		) {
+
+		}
+		else if(
+			preg_match($letter_pattern, $course_letter) && 
+			preg_match($num_pattern, $course_num)
+		) {
 	
-  	}
-		elseif(empty($course_code)) {
-			// it cannot be empty, but ...
 		}
   	else {
     	form_set_error("course_code_format", "Course code needs to be 4 capital letters followed by 5 numbers. e.g. HIST12345");
@@ -548,20 +559,24 @@ function lms_form_tokens_alter(array &$replacements, array $context) {
 				$entity_type = 'field_collection_item';
 				$bundle = 'field_lms_copy_sub_collection';
 
+				/*
 				// Course code
 				$field = 'field_lms_copy_course_code_value';
 				$table = 'field_data_field_lms_copy_course_code';
 				$course_code = _get_collection_item_value($entity_id, $entity_type, $bundle, $table, $field);
+				*/
 
 				// Year
 				$field = 'field_lms_copy_year_value';
         $table = 'field_data_field_lms_copy_year';
         $year = _get_collection_item_value($entity_id, $entity_type, $bundle, $table, $field);
 
+				/*
 				// Study period 
         $field = 'field_lms_copy_study_period_value';
         $table = 'field_data_field_lms_copy_study_period';
         $study_period = _get_collection_item_value($entity_id, $entity_type, $bundle, $table, $field);
+				*/
 
 				// All three components will exist.
 				$replacements[$context['tokens']['field-lms-subject-code']] = $course_code. "_". $year. "_". $study_period;  

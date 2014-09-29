@@ -1827,7 +1827,7 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       'settings' => array(
         'allowed_values' => array(
           0 => array(
-            'vocabulary' => 'study_period',
+            'vocabulary' => 'lms_study_period',
             'parent' => '0',
             'depth' => '',
           ),
@@ -1858,7 +1858,7 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       'entity_type' => 'field_collection_item',
       'field_name' => 'field_lms_copy_study_period',
       'label' => 'Study period',
-      'required' => 1,
+      'required' => 0,
       'settings' => array(
         'custom_add_another' => '',
         'custom_remove' => '',
@@ -1929,7 +1929,7 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       'entity_type' => 'field_collection_item',
       'field_name' => 'field_lms_copy_year',
       'label' => 'Year',
-      'required' => 1,
+      'required' => 0,
       'settings' => array(
         'custom_add_another' => '',
         'custom_remove' => '',
@@ -3392,76 +3392,6 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
     ),
   );
 
-  // Exported field: 'node-lmsform-field_lms_copy_verify'.
-  $fields['node-lmsform-field_lms_copy_verify'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_lms_copy_verify',
-      'foreign keys' => array(),
-      'indexes' => array(
-        'value' => array(
-          0 => 'value',
-        ),
-      ),
-      'locked' => '0',
-      'module' => 'list',
-      'settings' => array(
-        'allowed_values' => array(
-          'no' => 'No',
-          'yes' => 'Yes',
-        ),
-        'allowed_values_function' => '',
-        'allowed_values_php' => '',
-      ),
-      'translatable' => '0',
-      'type' => 'list_text',
-    ),
-    'field_instance' => array(
-      'bundle' => 'lmsform',
-      'default_value' => NULL,
-      'default_value_function' => '',
-      'default_value_php' => '',
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'module' => 'list',
-          'settings' => array(
-            'field_formatter_class' => '',
-          ),
-          'type' => 'list_default',
-          'weight' => 30,
-        ),
-        'teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-      ),
-      'entity_type' => 'node',
-      'field_name' => 'field_lms_copy_verify',
-      'label' => 'All subject codes, subject names, years and study periods are correct',
-      'required' => 1,
-      'settings' => array(
-        'custom_add_another' => '',
-        'custom_remove' => '',
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'options',
-        'settings' => array(),
-        'type' => 'options_buttons',
-        'weight' => '14',
-      ),
-    ),
-  );
-
   // Exported field: 'node-lmsform-field_lms_full_name'.
   $fields['node-lmsform-field_lms_full_name'] = array(
     'field_config' => array(
@@ -3636,6 +3566,85 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
         'settings' => array(),
         'type' => 'options_buttons',
         'weight' => '11',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-lmsform-field_lms_is_sub_coord'.
+  $fields['node-lmsform-field_lms_is_sub_coord'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_lms_is_sub_coord',
+      'foreign keys' => array(
+        'tid' => array(
+          'columns' => array(
+            'tid' => 'tid',
+          ),
+          'table' => 'taxonomy_term_data',
+        ),
+      ),
+      'indexes' => array(
+        'tid' => array(
+          0 => 'tid',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'taxonomy',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => array(
+            'vocabulary' => 'lms_is_sub_coord',
+            'parent' => '0',
+            'depth' => '',
+          ),
+        ),
+        'options_list_callback' => 'content_taxonomy_allowed_values',
+      ),
+      'translatable' => '0',
+      'type' => 'taxonomy_term_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'lmsform',
+      'custom_add_another' => '',
+      'custom_remove' => '',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'taxonomy',
+          'settings' => array(
+            'field_formatter_class' => '',
+          ),
+          'type' => 'taxonomy_term_reference_link',
+          'weight' => 33,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_lms_is_sub_coord',
+      'label' => 'Are you the Subject Coordinator, or will you add the the Subject Coordinator (and other staff) later?',
+      'required' => 1,
+      'settings' => array(
+        'custom_add_another' => '',
+        'custom_remove' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_buttons',
+        'weight' => '14',
       ),
     ),
   );
@@ -5528,6 +5537,8 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
     ),
     'field_instance' => array(
       'bundle' => 'lmsform',
+      'custom_add_another' => '',
+      'custom_remove' => '',
       'default_value' => NULL,
       'deleted' => '0',
       'description' => '',
@@ -5557,7 +5568,7 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       'entity_type' => 'node',
       'field_name' => 'field_lms_staff_collection',
       'label' => 'Staff',
-      'required' => 0,
+      'required' => 1,
       'settings' => array(
         'custom_add_another' => '',
         'custom_remove' => '',
@@ -5636,8 +5647,8 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
   // Included for use with string extractors like potx.
   t(' What are your top 5 priority areas for eTeaching professional development?');
   t('Abbreviation');
-  t('All subject codes, subject names, years and study periods are correct');
   t('Are you intending to teach two or more subjects (i.e. groups of students), through this LMS site?');
+  t('Are you the Subject Coordinator, or will you add the the Subject Coordinator (and other staff) later?');
   t('Cohort');
   t('Cohort label');
   t('Copy');

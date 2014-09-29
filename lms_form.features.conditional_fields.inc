@@ -335,8 +335,8 @@ function lms_form_conditional_fields_default_fields() {
   $items[] = array(
     'entity' => 'node',
     'bundle' => 'lmsform',
-    'dependent' => 'field_lms_copy_verify',
-    'dependee' => 'field_lms_how_create',
+    'dependent' => 'field_lms_staff_collection',
+    'dependee' => 'field_lms_is_sub_coord',
     'options' => array(
       'state' => 'visible',
       'condition' => 'value',
@@ -381,6 +381,20 @@ function lms_form_conditional_fields_default_fields() {
           4 => 0,
         ),
         6 => array(
+          1 => '1',
+          2 => '2',
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        13 => array(
+          1 => '1',
+          2 => '2',
+          5 => 0,
+          3 => 0,
+          4 => 0,
+        ),
+        12 => array(
           1 => '1',
           2 => '2',
           5 => 0,
@@ -456,6 +470,14 @@ function lms_form_conditional_fields_default_fields() {
           1 => '1',
           3 => 0,
         ),
+        13 => array(
+          1 => '1',
+          3 => 0,
+        ),
+        12 => array(
+          1 => '1',
+          3 => 0,
+        ),
         7 => array(
           1 => '1',
           3 => 0,
@@ -483,10 +505,10 @@ function lms_form_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => '1',
-      'value_form' => 'copy_forward',
+      'value_form' => '982',
       'value' => array(
         0 => array(
-          'value' => 'copy_forward',
+          'tid' => '982',
         ),
       ),
       'values' => array(),
