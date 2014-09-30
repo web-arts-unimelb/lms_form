@@ -240,11 +240,12 @@ function lms_form_url_inbound_alter(&$path, $original_path, $path_language)
 
 
 // Validate
-function _validate_email_domain($form, &$form_state){
+function _validate_email_domain($form, &$form_state) {
+	$lang = LANGUAGE_NONE;
 	$pattern = "/^[a-zA-Z0-9._%+-]+@unimelb\.edu\.au$/";
 
 	// Submitter email
-	$submitter_email = $form_state['input']['field_lms_uni_email']['und'][0]['email']; 
+	$submitter_email = $form_state['input']['field_lms_uni_email'][$lang][0]['email']; 
 	if(preg_match($pattern, $submitter_email)) {
 	}
 	else {
@@ -252,8 +253,8 @@ function _validate_email_domain($form, &$form_state){
 	}
 
 	// Staff collection fields
-	foreach($form_state['input']['field_lms_staff_collection']['und'] as $field_set) {
-		$collection_email = $field_set['field_lms_staff_email']['und']['0']['email'];
+	foreach($form_state['input']['field_lms_staff_collection'][$lang] as $field_set) {
+		$collection_email = $field_set['field_lms_staff_email'][$lang]['0']['email'];
 		if(empty($collection_email)) {
 		}
 		else if(preg_match($pattern, $collection_email)) { 
@@ -266,18 +267,20 @@ function _validate_email_domain($form, &$form_state){
 
 // Validate
 function _validate_staff_collection($form, &$form_state) {
-	foreach($form_state['input']['field_lms_staff_collection']['und'] as $field_set) {
-		$staff_name = $field_set['field_lms_staff_name']['und'];	
+	$lang = LANGUAGE_NONE;
+
+	foreach($form_state['input']['field_lms_staff_collection'][$lang] as $field_set) {
+		$staff_name = $field_set['field_lms_staff_name'][$lang];	
 
 		if(empty($staff_name)) {
 		}
 		else {
-			$collection_email = $field_set['field_lms_staff_email']['und']['0']['email'];
+			$collection_email = $field_set['field_lms_staff_email'][$lang]['0']['email'];
 			if(empty($collection_email)) {
 				form_set_error("empty_staff_email", "Staff email address cannot be empty.");
 			}		
 
-			$staff_role = $field_set['field_lms_staff_role']['und'];
+			$staff_role = $field_set['field_lms_staff_role'][$lang];
 			if($staff_role === "_none") {
 				form_set_error("empty_staff_role", "Staff role cannot be empty.");
 			}
@@ -521,6 +524,32 @@ function lms_form_tokens_alter(array &$replacements, array $context) {
   if ($context['type'] == 'node' && !empty($context['data']['node'])) {
     $node = $context['data']['node'];
 
+		// Prepare
+		$out_user_email = $replacements[$context['tokens']['node:field-lms-uni-email']];
+		$out_user_name = $replacements[$context['tokens']['node:field-lms-full-name']];
+		$out_user_phone = $replacements[$context['tokens']['node:field-lms-phone']];
+		$out_primary_subject = $replacements[$context['tokens']['node:field-lms-primary-subject']];
+
+		// User detail
+		$out_user_detail = "
+			<p>Uni email: $out_user_email</p>
+			<p>Full name: $out_user_name</p>
+			<p>Phone: $out_user_phone</p>
+			<p>Primary subject: $out_primary_subject</p>
+		";
+
+
+		// Final output
+		$out = $out_user_detail;
+
+		$replacements[$context['tokens']['node:field-lms-email']] = $out;
+
+		//test
+		$msg = $replacements[$context['tokens']['node:field-lms-email']]; 
+    watchdog('lms', $msg);
+
+
+		/*
 		// Cohort linked subjects label
 		if(isset($context['tokens']['field-lms-cohort-collection:0:field_lms_cohort_subject'])) {
 			$first_cohort_subject = $replacements[$context['tokens']['field-lms-cohort-collection:0:field_lms_cohort_subject']];
@@ -531,6 +560,7 @@ function lms_form_tokens_alter(array &$replacements, array $context) {
 				$replacements[$context['tokens']['field-lms-cohort-label']] = '';
 			}
 		}
+		*/
 
 		//test
 		/*
@@ -541,6 +571,7 @@ function lms_form_tokens_alter(array &$replacements, array $context) {
     watchdog('lms', $msg);
 		*/
 
+		/*
 		// Is copy forward verify radio button clicked? 
 		if(isset($node->field_lms_copy_verify)) {
       $is_verify = $node->field_lms_copy_verify['und'][0]['value'];
@@ -551,7 +582,9 @@ function lms_form_tokens_alter(array &$replacements, array $context) {
         $replacements[$context['tokens']['field-lms-copy-forward-verify']] = '';
       }
     }
+		*/
 
+		/*
 		// Subject code
     if(isset($node->field_lms_copy_sub_collection)) {
 			if(count($node->field_lms_copy_sub_collection) > 0) {
@@ -559,27 +592,29 @@ function lms_form_tokens_alter(array &$replacements, array $context) {
 				$entity_type = 'field_collection_item';
 				$bundle = 'field_lms_copy_sub_collection';
 
-				/*
-				// Course code
-				$field = 'field_lms_copy_course_code_value';
-				$table = 'field_data_field_lms_copy_course_code';
-				$course_code = _get_collection_item_value($entity_id, $entity_type, $bundle, $table, $field);
-				*/
+				// Course letter
+				$field = 'field_lms_copy_abb_value';
+        $table = 'field_data_field_lms_copy_abb';
+        $course_letter = _get_collection_item_value($entity_id, $entity_type, $bundle, $table, $field);
+
+				// Course number
+				$field = 'field_lms_copy_num_value';
+        $table = 'field_data_field_lms_copy_num';
+        $course_num = _get_collection_item_value($entity_id, $entity_type, $bundle, $table, $field);			
 
 				// Year
 				$field = 'field_lms_copy_year_value';
         $table = 'field_data_field_lms_copy_year';
         $year = _get_collection_item_value($entity_id, $entity_type, $bundle, $table, $field);
 
-				/*
-				// Study period 
+				// Study period
         $field = 'field_lms_copy_study_period_value';
         $table = 'field_data_field_lms_copy_study_period';
         $study_period = _get_collection_item_value($entity_id, $entity_type, $bundle, $table, $field);
-				*/
+
 
 				// All three components will exist.
-				$replacements[$context['tokens']['field-lms-subject-code']] = $course_code. "_". $year. "_". $study_period;  
+				$replacements[$context['tokens']['field-lms-subject-code']] = $course_letter.$course_num. "_". $year. "_". $study_period;
 			}
 			else {
 				$entity_id = null;
@@ -587,7 +622,9 @@ function lms_form_tokens_alter(array &$replacements, array $context) {
 			}
 
     }
+		*/
 
+		/*
 		// Staff detail label
 		if(isset($context['tokens']['field-lms-staff-collection:0:field_lms_staff_name'])) {
       $first_staff_name = $replacements[$context['tokens']['field-lms-staff-collection:0:field_lms_staff_name']];
@@ -609,6 +646,9 @@ function lms_form_tokens_alter(array &$replacements, array $context) {
         $replacements[$context['tokens']['field-lms-note-label']] = '';
       }
     }
+		*/
+
+
   }
 }
 
@@ -629,3 +669,4 @@ function _get_collection_item_value($entity_id, $entity_type, $bundle, $table, $
 
   return $obj->$field;
 }
+

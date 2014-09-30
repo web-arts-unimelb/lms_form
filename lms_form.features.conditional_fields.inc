@@ -505,10 +505,10 @@ function lms_form_conditional_fields_default_fields() {
       ),
       'selector' => '',
       'values_set' => '1',
-      'value_form' => '982',
+      'value_form' => 'No',
       'value' => array(
         0 => array(
-          'tid' => '982',
+          'value' => 'No',
         ),
       ),
       'values' => array(),
