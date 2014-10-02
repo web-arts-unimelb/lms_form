@@ -510,6 +510,8 @@ function _is_node_exist($node_title)
 
 //hook_tokens_alter
 function lms_form_tokens_alter(array &$replacements, array $context) {
+	$lang = LANGUAGE_NONE;
+
   $options = $context['options'];
 
   if (isset($options['language'])) {
@@ -525,28 +527,54 @@ function lms_form_tokens_alter(array &$replacements, array $context) {
     $node = $context['data']['node'];
 
 		// Prepare
-		$out_user_email = $replacements[$context['tokens']['node:field-lms-uni-email']];
-		$out_user_name = $replacements[$context['tokens']['node:field-lms-full-name']];
-		$out_user_phone = $replacements[$context['tokens']['node:field-lms-phone']];
-		$out_primary_subject = $replacements[$context['tokens']['node:field-lms-primary-subject']];
+		$user_email_part = $node->field_lms_uni_email[$lang][0]['email']; 
+		$user_name_part = $node->field_lms_full_name[$lang][0]['value']; 
+		$user_phone_part = $node->field_lms_phone[$lang][0]['value']; 
+		$primary_subject_part = $node->field_lms_primary_subject[$lang][0]['value'];
+		$teach_more_part = $node->field_lms_cohort_or_not[$lang][0]['value'];
 
-		// User detail
-		$out_user_detail = "
-			<p>Uni email: $out_user_email</p>
-			<p>Full name: $out_user_name</p>
-			<p>Phone: $out_user_phone</p>
-			<p>Primary subject: $out_primary_subject</p>
+		// Fore
+		$out_fore_part = "
+			<p>Uni email: $user_email_part</p>
+			<p>Full name: $user_name_part</p>
+			<p>Phone: $user_phone_part</p>
+			<p>Primary subject: $primary_subject_part</p>
+			<p>Are you intending to teach two or more subjects (i.e. groups of students), through this LMS site: $teach_more_part</p>	
 		";
 
+		// Cohort
+		$out_cohort_part = _lms_form_handle_cohort($node->field_lms_cohort_collection[$lang]); 
 
-		// Final output
-		$out = $out_user_detail;
+		// How to create
+		$create_part = $node->field_lms_how_create[$lang][0]['value'];
+		$out_create_part = "
+			<p>How would you like to your subject to be created and filled with content: $create_part</p>
+		";	
 
-		$replacements[$context['tokens']['node:field-lms-email']] = $out;
+		// Copy forward
+		$out_copy_part = _lms_form_handle_copy($node->field_lms_copy_sub_collection[$lang]);
 
-		//test
-		$msg = $replacements[$context['tokens']['node:field-lms-email']]; 
-    watchdog('lms', $msg);
+		// Subject cooridnator
+		$coor_part = $node->field_lms_is_sub_coord[$lang][0]['value'];
+		$out_coor_part = "
+			<p>Are you the Subject Coordinator, or will you add the the Subject Coordinator (and other staff) later: $coor_part</p>
+		";
+
+		// Staff
+		$out_staff_part = _lms_form_handle_staff($node->field_lms_staff_collection[$lang]);
+
+		$out = 
+			$out_fore_part. 
+			$out_cohort_part. 
+			$out_create_part. 
+			$out_copy_part.
+			$out_coor_part.
+			$out_staff_part
+		;
+
+ 
+		$replacements[$context['tokens']['field-lms-email']] = $out;
+
 
 
 		/*
@@ -652,7 +680,7 @@ function lms_form_tokens_alter(array &$replacements, array $context) {
   }
 }
 
-
+/*
 function _get_collection_item_value($entity_id, $entity_type, $bundle, $table, $field) {
 	$sql = "
  		SELECT 
@@ -668,5 +696,206 @@ function _get_collection_item_value($entity_id, $entity_type, $bundle, $table, $
   $obj = $result->fetchObject();
 
   return $obj->$field;
+}
+*/
+
+function _lms_form_handle_cohort($cohort_collection) {
+	$out = '';
+
+	$out_label = "<p>Linked subject code and subject name (just start typing to search). You can add multiple cohort linked subjects</p>";
+	$collection = array();
+
+	if(empty($cohort_collection)) {
+
+	}
+	else {
+		foreach($cohort_collection as $item) {
+			$entity_id = $item['value'];
+			$bundle = 'field_lms_cohort_collection';
+
+			$sql = "
+				SELECT
+					b.field_lms_cohort_subject_value	
+				FROM
+					field_data_field_lms_cohort_collection a
+				INNER JOIN 
+					field_data_field_lms_cohort_subject b
+				ON 
+					a.field_lms_cohort_collection_value = b.entity_id
+				WHERE
+					b.entity_id = :entity_id AND
+					b.bundle = :bundle
+			";
+			
+			$array = array(
+				':entity_id' => $entity_id, 
+				':bundle' => $bundle,
+			);
+			$res = db_query($sql, $array);
+			$value = $res->fetchField(); // Single value
+			$collection[] = $value;
+		}
+
+		$out_collection = '<p>'. implode(', ', $collection). '</p>';
+
+		$out = $out_label. " ". $out_collection;	
+	}
+
+	return $out;
+}
+
+
+function _lms_form_handle_copy($input_collection) {
+	$out = '';
+
+  $out_label = "<p>Copy forward this subject's content</p>";
+  $collection = array();
+
+  if(empty($input_collection)) {
+
+  }
+	else {
+		// It only loop once
+		foreach($input_collection as $item) {
+      $entity_id = $item['value'];
+      $bundle = 'field_lms_copy_sub_collection';
+
+			// First 4 letters
+			$table_coll = 'field_data_field_lms_copy_sub_collection';
+			$table_field = 'field_data_field_lms_copy_abb';
+			$field_coll = 'field_lms_copy_sub_collection_value';
+			$field_field = 'field_lms_copy_abb_value';
+			$letter = _lms_form_get_field_from_collection($entity_id, $bundle, $table_coll, $table_field, $field_coll, $field_field);
+
+			// 5 numbers
+			$table_coll = 'field_data_field_lms_copy_sub_collection';
+      $table_field = 'field_data_field_lms_copy_num';
+      $field_coll = 'field_lms_copy_sub_collection_value';
+      $field_field = 'field_lms_copy_num_value';
+      $number = _lms_form_get_field_from_collection($entity_id, $bundle, $table_coll, $table_field, $field_coll, $field_field);
+
+			// Year
+      $table_coll = 'field_data_field_lms_copy_sub_collection';
+      $table_field = 'field_data_field_lms_copy_year';
+      $field_coll = 'field_lms_copy_sub_collection_value';
+      $field_field = 'field_lms_copy_year_value';
+      $year = _lms_form_get_field_from_collection($entity_id, $bundle, $table_coll, $table_field, $field_coll, $field_field);
+
+			// Study period 
+      $table_coll = 'field_data_field_lms_copy_sub_collection';
+      $table_field = 'field_data_field_lms_copy_study_period';
+      $field_coll = 'field_lms_copy_sub_collection_value';
+      $field_field = 'field_lms_copy_study_period_value';
+      $study_period = _lms_form_get_field_from_collection($entity_id, $bundle, $table_coll, $table_field, $field_coll, $field_field);
+		}
+
+		$out = $out_label. '<p>'. $letter. $number. "_". $year. "_". $study_period. '</p>';
+	}
+
+	return $out;
+}
+
+
+function _lms_form_handle_staff($input_collection) {
+	$out = '';
+
+  $out_label = "<p>Staff listing</p>";
+  $collection = array();
+
+  if(empty($input_collection)) {
+	
+  }
+	else {
+		foreach($input_collection as $item) {
+			$entity_id = $item['value'];
+      $bundle = 'field_lms_staff_collection';
+
+			// Share
+			$table_coll = 'field_data_field_lms_staff_collection';
+			$field_coll = 'field_lms_staff_collection_value';
+
+			// Staff name 
+      $table_field = 'field_data_field_lms_staff_name';
+      $field_field = 'field_lms_staff_name_value';
+			$field_taxo = 'field_lms_staff_name_tid';
+      $staff_name = _lms_form_get_field_from_collection_taxo($entity_id, $bundle, $table_coll, $table_field, $field_coll, $field_field, $field_taxo);			
+
+			// Staff email
+      $table_field = 'field_data_field_lms_staff_email';
+      $field_field = 'field_lms_staff_email_email'; // The field name is different.
+      $staff_email = _lms_form_get_field_from_collection($entity_id, $bundle, $table_coll, $table_field, $field_coll, $field_field);
+
+			// Staff role
+			$table_field = 'field_data_field_lms_staff_role';
+      $field_field = 'field_lms_staff_role_value';
+			$field_taxo = 'field_lms_staff_role_tid';
+      $staff_role = _lms_form_get_field_from_collection_taxo($entity_id, $bundle, $table_coll, $table_field, $field_coll, $field_field, $field_taxo);
+			
+			$collection[] = $staff_name. ', '. $staff_email. ', '. $staff_role;
+    }
+	}
+
+	$out = $out_label. '<p>'. implode('; ', $collection). '</p>';
+	return $out;	
+}
+
+
+function _lms_form_get_field_from_collection($entity_id, $bundle, $table_coll, $table_field, $field_coll, $field_field) {
+	$return = '';
+
+	$sql = "
+  	SELECT
+    	b.$field_field  
+    FROM
+      $table_coll a
+    INNER JOIN 
+      $table_field b
+    ON 
+      a.$field_coll = b.entity_id
+    WHERE
+      b.entity_id = :entity_id AND
+      b.bundle = :bundle
+  ";
+
+  $array = array(
+  	':entity_id' => $entity_id,
+    ':bundle' => $bundle,
+	);
+  $res = db_query($sql, $array);
+  $return = $res->fetchField();
+
+	return $return;
+}
+
+
+function _lms_form_get_field_from_collection_taxo($entity_id, $bundle, $table_coll, $table_field, $field_coll, $field_field, $field_taxo) {
+  $return = '';
+
+  $sql = "
+    SELECT
+      c.name  
+    FROM
+      $table_coll a
+    INNER JOIN 
+      $table_field b
+    ON 
+      a.$field_coll = b.entity_id
+		INNER JOIN
+      taxonomy_term_data c
+		ON
+			b.$field_taxo = c.tid
+    WHERE
+      b.entity_id = :entity_id AND
+      b.bundle = :bundle
+  ";
+
+  $array = array(
+    ':entity_id' => $entity_id,
+    ':bundle' => $bundle,
+  );
+  $res = db_query($sql, $array);
+  $return = $res->fetchField();
+
+  return $return;
 }
 
