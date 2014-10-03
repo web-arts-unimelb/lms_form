@@ -2,8 +2,8 @@ html.js input.form-autocomplete {
 	width: 100%;
 }
 
-input[name='field_lms_copy_sub_collection_add_more'] {
-	display: none;
+form#lmsform-node-form .form-wrapper {
+	margin-bottom: 20px;
 }
 
 form#lms-survey-node-form div.field-group-div {
