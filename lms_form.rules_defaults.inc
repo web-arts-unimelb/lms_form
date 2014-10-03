@@ -20,7 +20,7 @@ function lms_form_default_rules_configuration() {
       "DO" : [
         { "mimemail" : {
             "key" : [ "node:title" ],
-            "to" : "gliang@unimelb.edu.au,[node:field-lms-uni-email]",
+            "to" : "gliang@unimelb.edu.au,[node:field-lms-uni-email],mitch.buzza@unimelb.edu.au",
             "from_name" : "Arts LMS Support",
             "from_mail" : "arts-eTeaching@unimelb.edu.au",
             "subject" : "LMS, [node:field-lms-primary-subject], [node:field-lms-full-name]",

@@ -3141,7 +3141,7 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       'settings' => array(
         'markup' => array(
           'format' => 'complete_full_html',
-          'value' => '<div class="form-item"><label>Linked subject code and subject name (just start typing to search). You can add multiple cohort linked subjects</label></div>',
+          'value' => '<div class="form-item"><label>Linked subject code and subject name (e.g. JAPN20003_2014_SM1 - Japanese 7). You can add multiple cohort linked subjects</label></div>',
         ),
       ),
       'translatable' => '0',
@@ -3218,7 +3218,11 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
     ),
     'field_instance' => array(
       'bundle' => 'lmsform',
-      'default_value' => NULL,
+      'default_value' => array(
+        0 => array(
+          'value' => 'No',
+        ),
+      ),
       'default_value_function' => '',
       'default_value_php' => '',
       'deleted' => '0',
@@ -3274,7 +3278,7 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       'settings' => array(
         'markup' => array(
           'format' => 'complete_full_html',
-          'value' => '<div class="form-item"><label>Copy forward this subject\'s content.  (The subject\'s code must written as 4 letters and 5 numbers for example ABCD10030_2014_SM2)</label></div>',
+          'value' => '<div class="form-item"><label>Copy forward this subject\'s content.  (The subject\'s code must written as 4 letters and 5 numbers e.g. JAPN20003_2014_SM1 - Japanese 7)</label></div>',
         ),
       ),
       'translatable' => '0',
@@ -3632,7 +3636,7 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
       ),
       'entity_type' => 'node',
       'field_name' => 'field_lms_is_sub_coord',
-      'label' => 'Are you the Subject Coordinator, or will you add the the Subject Coordinator (and other staff) later?',
+      'label' => 'Are you the subject coordinator, or will you add the the subject coordinator (and other staff) later?',
       'required' => 1,
       'settings' => array(
         'custom_add_another' => '',
@@ -3968,7 +3972,7 @@ Please nominate your subjects for the Learning Management System (LMS). You will
       ),
       'entity_type' => 'node',
       'field_name' => 'field_lms_primary_subject',
-      'label' => 'Subject Code and Subject Name (just start typing to search)',
+      'label' => 'Subject code and subject name (e.g. JAPN10005_2014_SM1 - Japanese 7)',
       'required' => 1,
       'settings' => array(
         'better_formats' => array(
@@ -4001,8 +4005,6 @@ Please nominate your subjects for the Learning Management System (LMS). You will
             ),
           ),
         ),
-        'custom_add_another' => '',
-        'custom_remove' => '',
         'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
@@ -5648,7 +5650,7 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
   t(' What are your top 5 priority areas for eTeaching professional development?');
   t('Abbreviation');
   t('Are you intending to teach two or more subjects (i.e. groups of students), through this LMS site?');
-  t('Are you the Subject Coordinator, or will you add the the Subject Coordinator (and other staff) later?');
+  t('Are you the subject coordinator, or will you add the the subject coordinator (and other staff) later?');
   t('Cohort');
   t('Cohort label');
   t('Copy');
@@ -5686,7 +5688,7 @@ XNTS90073_2014_SM1 - Urbanisation Issue in the Develop. World',
   t('Staff');
   t('Study period');
   t('Subject');
-  t('Subject Code and Subject Name (just start typing to search)');
+  t('Subject code and subject name (e.g. JAPN10005_2014_SM1 - Japanese 7)');
   t('The subject you are copying from must exist and have content, please double-check
 <ul>
 <li><a href="http://lms.unimelb.edu.au/login" target="_blank">LMS</a></li>

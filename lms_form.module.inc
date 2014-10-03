@@ -326,6 +326,7 @@ function _validate_email_domain($form, &$form_state) {
 // Validate
 function _validate_staff_collection($form, &$form_state) {
 	$lang = LANGUAGE_NONE;
+	$staff_role_store = array();
 
 	foreach($form_state['input']['field_lms_staff_collection'][$lang] as $field_set) {
 		$staff_name = $field_set['field_lms_staff_name'][$lang];	
@@ -338,12 +339,24 @@ function _validate_staff_collection($form, &$form_state) {
 				form_set_error("empty_staff_email", "Staff email address cannot be empty.");
 			}		
 
-			$staff_role = $field_set['field_lms_staff_role'][$lang];
-			if($staff_role === "_none") {
+			$staff_role_tid = $field_set['field_lms_staff_role'][$lang];
+			$term = taxonomy_term_load($staff_role_tid);
+			$staff_role_store[] = strtolower($term->name);
+			if($staff_role_tid === '_none') {
 				form_set_error("empty_staff_role", "Staff role cannot be empty.");
 			}
 		}
 	}
+
+	// At least one subject coordinator
+	$test_term = 'subject coordinator';
+	if(in_array($test_term, $staff_role_store)) {
+
+	}
+	else {
+		form_set_error("subject_coordinator_role", "There must be a subject coordinator.");
+	}
+
 }
 
 // Validate
@@ -593,11 +606,12 @@ function lms_form_tokens_alter(array &$replacements, array $context) {
 
 		// Fore
 		$out_fore_part = "
-			<p>Uni email: $user_email_part</p>
-			<p>Full name: $user_name_part</p>
-			<p>Phone: $user_phone_part</p>
-			<p>Primary subject: $primary_subject_part</p>
-			<p>Are you intending to teach two or more subjects (i.e. groups of students), through this LMS site: $teach_more_part</p>	
+			<p><strong>Uni email</strong>: $user_email_part</p>
+			<p><strong>Full name</strong>: $user_name_part</p>
+			<p><strong>Phone</strong>: $user_phone_part</p>
+			<p><strong>Subject code and subject name (e.g. JAPN10005_2014_SM1 - Japanese 7)</strong>:</p>
+			<p>$primary_subject_part</p>
+			<p><strong>Are you intending to teach two or more subjects (i.e. groups of students), through this LMS site</strong>: $teach_more_part</p>	
 		";
 
 		// Cohort
@@ -606,7 +620,7 @@ function lms_form_tokens_alter(array &$replacements, array $context) {
 		// How to create
 		$create_part = $node->field_lms_how_create[$lang][0]['value'];
 		$out_create_part = "
-			<p>How would you like to your subject to be created and filled with content: $create_part</p>
+			<p><strong>How would you like to your subject to be created and filled with content</strong>: $create_part</p>
 		";	
 
 		// Copy forward
@@ -615,7 +629,7 @@ function lms_form_tokens_alter(array &$replacements, array $context) {
 		// Subject cooridnator
 		$coor_part = $node->field_lms_is_sub_coord[$lang][0]['value'];
 		$out_coor_part = "
-			<p>Are you the Subject Coordinator, or will you add the the Subject Coordinator (and other staff) later: $coor_part</p>
+			<p><strong>Are you the Subject Coordinator, or will you add the the Subject Coordinator (and other staff) later</strong>: $coor_part</p>
 		";
 
 		// Staff
@@ -624,7 +638,7 @@ function lms_form_tokens_alter(array &$replacements, array $context) {
 		// Note
 		$note_part = $node->field_lms_note[$lang][0]['value'];
 		$out_note_part = "
-			<p>Note</p><p>$note_part</p>
+			<p><strong>Note</strong></p><p>$note_part</p>
 		";
 
 		$out = 
@@ -646,7 +660,7 @@ function lms_form_tokens_alter(array &$replacements, array $context) {
 function _lms_form_handle_cohort($cohort_collection) {
 	$out = '';
 
-	$out_label = "<p>Linked subject code and subject name (just start typing to search). You can add multiple cohort linked subjects</p>";
+	$out_label = "<p><strong>Linked subject code and subject name (e.g. JAPN10005_2014_SM1 - Japanese 7). You can add multiple cohort linked subjects</strong></p>";
 	$collection = array();
 
 	if(empty($cohort_collection)) {
@@ -692,7 +706,7 @@ function _lms_form_handle_cohort($cohort_collection) {
 function _lms_form_handle_copy($input_collection) {
 	$out = '';
 
-  $out_label = "<p>Copy forward this subject's content</p>";
+  $out_label = "<p><strong>Copy forward this subject's content</strong></p>";
   $collection = array();
 
   if(empty($input_collection)) {
@@ -743,7 +757,7 @@ function _lms_form_handle_copy($input_collection) {
 function _lms_form_handle_staff($input_collection) {
 	$out = '';
 
-  $out_label = "<p>Staff listing</p>";
+  $out_label = "<p><strong>Staff</strong></p>";
   $collection = array();
 
   if(empty($input_collection)) {
