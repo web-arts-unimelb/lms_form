@@ -349,12 +349,16 @@ function _validate_staff_collection($form, &$form_state) {
 	}
 
 	// At least one subject coordinator
-	$test_term = 'subject coordinator';
-	if(in_array($test_term, $staff_role_store)) {
+	$is_sub_coordinator = strtolower($form_state['input']['field_lms_is_sub_coord'][$lang]);
 
-	}
-	else {
-		form_set_error("subject_coordinator_role", "There must be a subject coordinator.");
+	if($is_sub_coordinator == 'no') {
+		$test_term = 'subject coordinator';
+		if(in_array($test_term, $staff_role_store)) {
+
+		}
+		else {
+			form_set_error("subject_coordinator_role", "There must be a subject coordinator.");
+		}
 	}
 
 }
