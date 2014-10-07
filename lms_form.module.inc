@@ -370,24 +370,31 @@ function _validate_course_code($form, &$form_state) {
 	foreach($form_state['input']['field_lms_copy_sub_collection'][$lang] as $field_set) {
 		$course_letter = $field_set['field_lms_copy_abb'][$lang]['0']['value'];
 		$course_num = $field_set['field_lms_copy_num'][$lang]['0']['value'];
+		$course_year = $field_set['field_lms_copy_year'][$lang];
+		$course_study_period = $field_set['field_lms_copy_study_period'][$lang];
 
 		$letter_pattern = "/^[A-Z]{4}$/";
 		$num_pattern = "/^[0-9]{5}$/";		
 
+		// All empty
 		if(
 			empty($course_letter) &&
-      empty($course_num)
+      empty($course_num) && 
+			$course_year == '_none' &&
+			$course_study_period == '_none'
 		) {
 
 		}
 		else if(
 			preg_match($letter_pattern, $course_letter) && 
-			preg_match($num_pattern, $course_num)
+			preg_match($num_pattern, $course_num) &&
+			$course_year != '_none' &&
+      $course_study_period != '_none'
 		) {
 	
 		}
   	else {
-    	form_set_error("course_code_format", "Course code needs to be 4 capital letters followed by 5 numbers. e.g. HIST12345");
+    	form_set_error("course_code_format", "Course code needs to be 4 capital letters followed by 5 numbers. e.g. HIST12345. Year and study period cannot be empty.");
   	}	
 	}
 }
