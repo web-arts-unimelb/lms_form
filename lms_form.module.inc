@@ -652,6 +652,17 @@ function lms_form_tokens_alter(array &$replacements, array $context) {
 			<p><strong>Note</strong></p><p>$note_part</p>
 		";
 
+		// Statement
+		$out_stat_part = "
+<p>
+Thanks for your formal nomination of your LMS subject site. Your request will be checked and forwarded to the central LMS team who will create the site. The enrolled students will then be fed in from ISIS and the staff members will be added. You can then begin customising and updating your site, before making it available to the students.
+</p>
+<hr/>
+<p>
+Need help with your subject's LMS site? We are running LMS drop-in Help sessions. For dates and further information please see the <a href='http://staff.arts.unimelb.edu.au/eteaching'>Arts Faculty staff intranet</a>. There is no need to register for these sessions, staff are free to drop in for as long or short a time as they have available.
+</p>
+		";
+
 		$out = 
 			$out_fore_part. 
 			$out_cohort_part. 
@@ -659,7 +670,8 @@ function lms_form_tokens_alter(array &$replacements, array $context) {
 			$out_copy_part.
 			$out_coor_part.
 			$out_staff_part.
-			$out_note_part
+			$out_note_part.
+			$out_stat_part
 		;
  
 		$replacements[$context['tokens']['field-lms-email']] = $out;
