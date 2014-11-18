@@ -510,7 +510,7 @@ function _set_lms_form_title()
 		$curr_month_display = "Semester Two, July - December";
 	}
 	
-	$return_title = "LMS Subject Nominations 2014";
+	$return_title = "LMS Subject Nominations 2015";
 	
 	return $return_title;
 }
@@ -620,7 +620,7 @@ function lms_form_tokens_alter(array &$replacements, array $context) {
 			<p><strong>Uni email</strong>: $user_email_part</p>
 			<p><strong>Full name</strong>: $user_name_part</p>
 			<p><strong>Phone</strong>: $user_phone_part</p>
-			<p><strong>Subject code and subject name (e.g. JAPN10005_2014_SM1 - Japanese 7)</strong>:</p>
+			<p><strong>Subject code and subject name (e.g. JAPN10005_2015_SM1 - Japanese 7)</strong>:</p>
 			<p>$primary_subject_part</p>
 			<p><strong>Are you intending to teach two or more subjects (i.e. groups of students), through this LMS site</strong>: $teach_more_part</p>	
 		";
@@ -683,7 +683,7 @@ Need help with your subject's LMS site? We are running LMS drop-in Help sessions
 function _lms_form_handle_cohort($cohort_collection) {
 	$out = '';
 
-	$out_label = "<p><strong>Linked subject code and subject name (e.g. JAPN10005_2014_SM1 - Japanese 7). You can add multiple cohort linked subjects</strong></p>";
+	$out_label = "<p><strong>Linked subject code and subject name (e.g. JAPN10005_2015_SM1 - Japanese 7). You can add multiple cohort linked subjects</strong></p>";
 	$collection = array();
 
 	if(empty($cohort_collection)) {
