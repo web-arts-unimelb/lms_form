@@ -394,7 +394,8 @@ function _validate_course_code($form, &$form_state) {
 	
 		}
   	else {
-    	form_set_error("course_code_format", "Course code needs to be 4 capital letters followed by 5 numbers. e.g. HIST12345. Year and study period cannot be empty.");
+			$msg = "Copy forward subject code error. Abbreviation = 4 Capital Letters (eg JAPN, HIST, FREN, CRIM etc). Number = 5 numbers (eg 10001, 20003, 90023 etc). Year and Study Period cannot be empty. Subject Title not necessary for this section.";
+    	form_set_error("course_code_format", $msg);
   	}	
 	}
 }
