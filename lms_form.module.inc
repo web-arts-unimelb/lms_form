@@ -368,6 +368,8 @@ function _validate_course_code($form, &$form_state) {
 	$lang = LANGUAGE_NONE;
 
 	foreach($form_state['input']['field_lms_copy_sub_collection'][$lang] as $field_set) {
+		$how_create = $form_state['input']['field_lms_how_create'][$lang];
+
 		$course_letter = $field_set['field_lms_copy_abb'][$lang]['0']['value'];
 		$course_num = $field_set['field_lms_copy_num'][$lang]['0']['value'];
 		$course_year = $field_set['field_lms_copy_year'][$lang];
@@ -381,9 +383,10 @@ function _validate_course_code($form, &$form_state) {
 			empty($course_letter) &&
       empty($course_num) && 
 			$course_year == '_none' &&
-			$course_study_period == '_none'
+			$course_study_period == '_none' && 
+			$how_create == 'create_new'
 		) {
-
+			// All good
 		}
 		else if(
 			preg_match($letter_pattern, $course_letter) && 
@@ -391,7 +394,7 @@ function _validate_course_code($form, &$form_state) {
 			$course_year != '_none' &&
       $course_study_period != '_none'
 		) {
-	
+			// All good
 		}
   	else {
 			$msg = "Copy forward subject code error. Abbreviation = 4 Capital Letters (eg JAPN, HIST, FREN, CRIM etc). Number = 5 numbers (eg 10001, 20003, 90023 etc). Year and Study Period cannot be empty. Subject Title not necessary for this section.";
