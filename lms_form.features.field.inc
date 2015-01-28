@@ -2037,40 +2037,41 @@ VISM90001_2015_SM2 - Text, Time and Space',
     ),
   );
 
-  // Exported field: 'node-lms_survey-field_lms_survey_dev_area'.
-  $fields['node-lms_survey-field_lms_survey_dev_area'] = array(
+  // Exported field: 'node-lms_survey-field_lms_survey_area'.
+  $fields['node-lms_survey-field_lms_survey_area'] = array(
     'field_config' => array(
       'active' => '1',
       'cardinality' => '-1',
       'deleted' => '0',
       'entity_types' => array(),
-      'field_name' => 'field_lms_survey_dev_area',
-      'foreign keys' => array(),
+      'field_name' => 'field_lms_survey_area',
+      'foreign keys' => array(
+        'tid' => array(
+          'columns' => array(
+            'tid' => 'tid',
+          ),
+          'table' => 'taxonomy_term_data',
+        ),
+      ),
       'indexes' => array(
-        'value' => array(
-          0 => 'value',
+        'tid' => array(
+          0 => 'tid',
         ),
       ),
       'locked' => '0',
-      'module' => 'list',
+      'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
-          'Setting up and adding content' => 'Setting up and adding content',
-          'Assessments, Marking and Grading' => 'Assessments, Marking and Grading',
-          'Using digital media with LMS' => 'Using digital media with LMS',
-          'Collaborative tools (Blogs and Wikis)' => 'Collaborative tools (Blogs and Wikis)',
-          'Making your own digital media teaching resources' => 'Making your own digital media teaching resources',
-          'Using existing video resources in the LMS' => 'Using existing video resources in the LMS',
-          'Using existing audio resources in the LMS' => 'Using existing audio resources in the LMS',
-          'Options for managing copyright approved material' => 'Using existing audio resources in the LMS',
-          'Making your Powerpoints more engaging' => 'Making your Powerpoints more engaging',
-          'Using Skype to record guest speakers' => 'Using Skype to record guest speakers',
-          'Performance techniques for recording lectures' => 'Performance techniques for recording lectures',
+          0 => array(
+            'vocabulary' => 'lms_eteaching_area',
+            'parent' => '0',
+            'depth' => '',
+          ),
         ),
-        'allowed_values_function' => '',
+        'options_list_callback' => 'content_taxonomy_allowed_values',
       ),
       'translatable' => '0',
-      'type' => 'list_text',
+      'type' => 'taxonomy_term_reference',
     ),
     'field_instance' => array(
       'bundle' => 'lms_survey',
@@ -2080,12 +2081,12 @@ VISM90001_2015_SM2 - Text, Time and Space',
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'list',
+          'module' => 'taxonomy',
           'settings' => array(
             'field_formatter_class' => '',
           ),
-          'type' => 'list_default',
-          'weight' => 2,
+          'type' => 'taxonomy_term_reference_link',
+          'weight' => 13,
         ),
         'teaser' => array(
           'label' => 'above',
@@ -2095,12 +2096,10 @@ VISM90001_2015_SM2 - Text, Time and Space',
         ),
       ),
       'entity_type' => 'node',
-      'field_name' => 'field_lms_survey_dev_area',
-      'label' => ' What are your top 5 priority areas for eTeaching professional development?',
+      'field_name' => 'field_lms_survey_area',
+      'label' => 'What are your top 5 priority areas for eTeaching professional development in 2015?',
       'required' => 0,
       'settings' => array(
-        'custom_add_another' => '',
-        'custom_remove' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -2108,7 +2107,82 @@ VISM90001_2015_SM2 - Text, Time and Space',
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '5',
+        'weight' => '9',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-lms_survey-field_lms_survey_incorp'.
+  $fields['node-lms_survey-field_lms_survey_incorp'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_lms_survey_incorp',
+      'foreign keys' => array(
+        'tid' => array(
+          'columns' => array(
+            'tid' => 'tid',
+          ),
+          'table' => 'taxonomy_term_data',
+        ),
+      ),
+      'indexes' => array(
+        'tid' => array(
+          0 => 'tid',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'taxonomy',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => array(
+            'vocabulary' => 'lms_incorporating',
+            'parent' => '0',
+            'depth' => '',
+          ),
+        ),
+        'options_list_callback' => 'content_taxonomy_allowed_values',
+      ),
+      'translatable' => '0',
+      'type' => 'taxonomy_term_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'lms_survey',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'taxonomy',
+          'settings' => array(
+            'field_formatter_class' => '',
+          ),
+          'type' => 'taxonomy_term_reference_link',
+          'weight' => 14,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_lms_survey_incorp',
+      'label' => 'Would you like more information about:',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_buttons',
+        'weight' => '8',
       ),
     ),
   );
@@ -2164,7 +2238,7 @@ VISM90001_2015_SM2 - Text, Time and Space',
       ),
       'entity_type' => 'node',
       'field_name' => 'field_lms_survey_other_need',
-      'label' => 'Do you have other eTeaching requirements or training needs?',
+      'label' => 'How can be best help you? Do you have other eTeaching requirements or training needs?',
       'required' => 0,
       'settings' => array(
         'better_formats' => array(
@@ -2172,6 +2246,7 @@ VISM90001_2015_SM2 - Text, Time and Space',
             'complete_full_html' => 'complete_full_html',
             'filtered_html' => 'filtered_html',
             'full_html' => 'full_html',
+            'php_code' => 0,
             'plain_text' => 'plain_text',
           ),
           'allowed_formats_toggle' => 0,
@@ -2187,14 +2262,15 @@ VISM90001_2015_SM2 - Text, Time and Space',
               'full_html' => array(
                 'weight' => '0',
               ),
+              'php_code' => array(
+                'weight' => '11',
+              ),
               'plain_text' => array(
                 'weight' => '10',
               ),
             ),
           ),
         ),
-        'custom_add_another' => '',
-        'custom_remove' => '',
         'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
@@ -2205,7 +2281,7 @@ VISM90001_2015_SM2 - Text, Time and Space',
           'rows' => '5',
         ),
         'type' => 'text_textarea',
-        'weight' => '6',
+        'weight' => '11',
       ),
     ),
   );
@@ -2275,7 +2351,7 @@ VISM90001_2015_SM2 - Text, Time and Space',
           'content_taxonomy_opt_groups' => FALSE,
         ),
         'type' => 'options_select',
-        'weight' => '3',
+        'weight' => '4',
       ),
     ),
   );
@@ -2345,7 +2421,7 @@ VISM90001_2015_SM2 - Text, Time and Space',
           'content_taxonomy_opt_groups' => FALSE,
         ),
         'type' => 'options_select',
-        'weight' => '4',
+        'weight' => '6',
       ),
     ),
   );
@@ -2415,78 +2491,7 @@ VISM90001_2015_SM2 - Text, Time and Space',
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '10',
-      ),
-    ),
-  );
-
-  // Exported field: 'node-lms_survey-field_survey_incop_video_multi'.
-  $fields['node-lms_survey-field_survey_incop_video_multi'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '-1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_survey_incop_video_multi',
-      'foreign keys' => array(),
-      'indexes' => array(
-        'value' => array(
-          0 => 'value',
-        ),
-      ),
-      'locked' => '0',
-      'module' => 'list',
-      'settings' => array(
-        'allowed_values' => array(
-          'create_video' => 'Creating video resources for your teaching (e.g. interviews, supplementary material, introductory or concept-based material traditionally presented in lectures to free up face-to-face time for discussion and student centred activities)?',
-          'use_skype' => 'Using Skype for your teaching (e.g. to pre-record guest speakers, or have guest speakers appear \'live\' in your classroom)',
-          'tech_for_record' => 'Performance techniques for recording /videoing lectures and teaching materials (e.g. using a teleprompter, controlling how you look and sound on-camera, interview techniques, optimising your recording location)',
-        ),
-        'allowed_values_function' => '',
-        'allowed_values_php' => '',
-      ),
-      'translatable' => '0',
-      'type' => 'list_text',
-    ),
-    'field_instance' => array(
-      'bundle' => 'lms_survey',
-      'default_value' => NULL,
-      'default_value_function' => '',
-      'default_value_php' => '',
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'module' => 'list',
-          'settings' => array(
-            'field_formatter_class' => '',
-          ),
-          'type' => 'list_default',
-          'weight' => 6,
-        ),
-        'teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-      ),
-      'entity_type' => 'node',
-      'field_name' => 'field_survey_incop_video_multi',
-      'label' => 'Would you like more information about:',
-      'required' => 0,
-      'settings' => array(
-        'custom_add_another' => '',
-        'custom_remove' => '',
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'options',
-        'settings' => array(),
-        'type' => 'options_buttons',
-        'weight' => '7',
+        'weight' => '11',
       ),
     ),
   );
@@ -2544,7 +2549,7 @@ VISM90001_2015_SM2 - Text, Time and Space',
       ),
       'entity_type' => 'node',
       'field_name' => 'field_survey_more_turnitin',
-      'label' => 'Would you like further information or a one-on-one session on using Turnitin, marking online and collating results in the GradeCentre?',
+      'label' => 'Would you like further information or a customized session for your tutors, on using Turnitin, marking online and using the Grade Centre?',
       'required' => 0,
       'settings' => array(
         'custom_add_another' => '',
@@ -2576,8 +2581,13 @@ VISM90001_2015_SM2 - Text, Time and Space',
       'settings' => array(
         'markup' => array(
           'format' => 'complete_full_html',
-          'value' => '<p>Please complete the short survey below to help us better understand your priorities for eTeaching professional development and support.  When you click on Save at the end of the page, you will automatically be redirected to the 2014 LMS Subject Nomination form. You will only see this survey once, if you are nominating multiple subjects.  Thank you very much for your response.</p>
-<p>&nbsp;</p>',
+          'value' => '<p>Please complete this short survey to help us better understand your priorities for eTeaching professional development and support. When you click on Save at the end of the page, you will automatically be redirected to the <strong>2015 LMS Subject Nomination form</strong>. You will only see this survey <strong>once</strong>, if you are nominating multiple subjects. Thank you very much for your response.</p>
+<p>&nbsp;</p>
+<input class="button form-submit" type="submit" id="edit-submit-1" name="op" value="I do not want to do the survey, go directly to LMS nomination">
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2>eTeaching Survey</h2>
+',
         ),
       ),
       'translatable' => '0',
@@ -2689,103 +2699,6 @@ VISM90001_2015_SM2 - Text, Time and Space',
         'settings' => array(),
         'type' => 'options_buttons',
         'weight' => '14',
-      ),
-    ),
-  );
-
-  // Exported field: 'node-lms_survey-field_survey_other_need'.
-  $fields['node-lms_survey-field_survey_other_need'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_survey_other_need',
-      'foreign keys' => array(
-        'format' => array(
-          'columns' => array(
-            'format' => 'format',
-          ),
-          'table' => 'filter_format',
-        ),
-      ),
-      'indexes' => array(
-        'format' => array(
-          0 => 'format',
-        ),
-      ),
-      'locked' => '0',
-      'module' => 'text',
-      'settings' => array(),
-      'translatable' => '0',
-      'type' => 'text_long',
-    ),
-    'field_instance' => array(
-      'bundle' => 'lms_survey',
-      'default_value' => NULL,
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'module' => 'text',
-          'settings' => array(
-            'field_formatter_class' => '',
-          ),
-          'type' => 'text_default',
-          'weight' => 11,
-        ),
-        'teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-      ),
-      'entity_type' => 'node',
-      'field_name' => 'field_survey_other_need',
-      'label' => 'Do you have other any eTeaching requirements or training needs?',
-      'required' => 0,
-      'settings' => array(
-        'better_formats' => array(
-          'allowed_formats' => array(
-            'complete_full_html' => 'complete_full_html',
-            'filtered_html' => 'filtered_html',
-            'full_html' => 'full_html',
-            'plain_text' => 'plain_text',
-          ),
-          'allowed_formats_toggle' => 0,
-          'default_order_toggle' => 0,
-          'default_order_wrapper' => array(
-            'formats' => array(
-              'complete_full_html' => array(
-                'weight' => '0',
-              ),
-              'filtered_html' => array(
-                'weight' => '0',
-              ),
-              'full_html' => array(
-                'weight' => '0',
-              ),
-              'plain_text' => array(
-                'weight' => '10',
-              ),
-            ),
-          ),
-        ),
-        'custom_add_another' => '',
-        'custom_remove' => '',
-        'text_processing' => '0',
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'text',
-        'settings' => array(
-          'rows' => '5',
-        ),
-        'type' => 'text_textarea',
-        'weight' => '11',
       ),
     ),
   );
@@ -3024,7 +2937,7 @@ VISM90001_2015_SM2 - Text, Time and Space',
       'settings' => array(
         'markup' => array(
           'format' => 'complete_full_html',
-          'value' => '<div class="form-item"><label>Linked subject code and subject name (e.g. JAPN20003_2014_SM1 - Japanese 7). You can add multiple cohort linked subjects</label></div>',
+          'value' => '<div class="form-item"><label>Linked subject code and subject name (e.g. JAPN20003_2015_SM1 - Japanese 7). You can add multiple cohort linked subjects</label></div>',
         ),
       ),
       'translatable' => '0',
@@ -5415,7 +5328,6 @@ VISM90001_2015_SM2 - Text, Time and Space',
 
   // Translatables
   // Included for use with string extractors like potx.
-  t(' What are your top 5 priority areas for eTeaching professional development?');
   t('Abbreviation');
   t('Are you intending to teach two or more subjects (i.e. groups of students), through this LMS site?');
   t('Are you the subject coordinator, or will you add the the subject coordinator (and other staff) later?');
@@ -5425,11 +5337,10 @@ VISM90001_2015_SM2 - Text, Time and Space',
   t('Copy label');
   t('Do you enable statistics tracking on items in your LMS subject site?');
   t('Do you give feedback to students online via the LMS?');
-  t('Do you have other any eTeaching requirements or training needs?');
-  t('Do you have other eTeaching requirements or training needs?');
   t('Do your students submit their assessment via Turnitin?');
   t('Email');
   t('Full name');
+  t('How can be best help you? Do you have other eTeaching requirements or training needs?');
   t('How would you like to your subject to be created and filled with content?');
   t('If your cohort linked subject(s) are not able to be found in this search box, please type it like this: "ABCD00000_YEAR _PERIOD - Full Subject Title" You can find all the information about the <i>Subject Code</i>, <i>Year</i>, <i>Study Period</i> and <i>Full Title</i> at these various sites:
 <ul>
@@ -5465,9 +5376,10 @@ VISM90001_2015_SM2 - Text, Time and Space',
 </ul>');
   t('This is called <a href="http://lms.unimelb.edu.au/start/nominations">cohort linking</a>');
   t('Uni email');
+  t('What are your top 5 priority areas for eTeaching professional development in 2015?');
   t('What is your preferred format for eTeaching professional development?');
   t('When do you prefer training?');
-  t('Would you like further information or a one-on-one session on using Turnitin, marking online and collating results in the GradeCentre?');
+  t('Would you like further information or a customized session for your tutors, on using Turnitin, marking online and using the Grade Centre?');
   t('Would you like more information about:');
   t('Would you like to make better use of collecting data in your LMS subject site for items within (and external to) the LMS?');
   t('Year');

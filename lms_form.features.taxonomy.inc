@@ -9,6 +9,52 @@
  */
 function lms_form_taxonomy_default_vocabularies() {
   return array(
+    'lms_eteaching_area' => array(
+      'name' => 'LMS eteaching area',
+      'machine_name' => 'lms_eteaching_area',
+      'description' => '',
+      'hierarchy' => '0',
+      'module' => 'taxonomy',
+      'weight' => '0',
+      'rdf_mapping' => array(
+        'rdftype' => array(
+          0 => 'skos:ConceptScheme',
+        ),
+        'name' => array(
+          'predicates' => array(
+            0 => 'dc:title',
+          ),
+        ),
+        'description' => array(
+          'predicates' => array(
+            0 => 'rdfs:comment',
+          ),
+        ),
+      ),
+    ),
+    'lms_incorporating' => array(
+      'name' => 'LMS incorporating',
+      'machine_name' => 'lms_incorporating',
+      'description' => '',
+      'hierarchy' => '0',
+      'module' => 'taxonomy',
+      'weight' => '0',
+      'rdf_mapping' => array(
+        'rdftype' => array(
+          0 => 'skos:ConceptScheme',
+        ),
+        'name' => array(
+          'predicates' => array(
+            0 => 'dc:title',
+          ),
+        ),
+        'description' => array(
+          'predicates' => array(
+            0 => 'rdfs:comment',
+          ),
+        ),
+      ),
+    ),
     'lms_is_sub_coord' => array(
       'name' => 'LMS is subject coordinator',
       'machine_name' => 'lms_is_sub_coord',

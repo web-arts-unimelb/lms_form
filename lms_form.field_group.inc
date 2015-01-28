@@ -21,7 +21,7 @@ function lms_form_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Assessment, marking and feedback',
-    'weight' => '4',
+    'weight' => '5',
     'children' => array(
       0 => 'field_survey_turnitin',
       1 => 'field_survey_online_feedback',
@@ -55,7 +55,7 @@ function lms_form_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Learning Analytics',
-    'weight' => '6',
+    'weight' => '10',
     'children' => array(
       0 => 'field_survey_tracking',
       1 => 'field_survey_collect_data',
@@ -89,9 +89,9 @@ function lms_form_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Incorporating video (and the "flipped classroom") in your teaching',
-    'weight' => '5',
+    'weight' => '7',
     'children' => array(
-      0 => 'field_survey_incop_video_multi',
+      0 => 'field_lms_survey_incorp',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -236,7 +236,7 @@ function lms_form_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Other',
-    'weight' => '7',
+    'weight' => '12',
     'children' => array(
       0 => 'field_survey_other_need',
     ),
