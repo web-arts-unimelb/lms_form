@@ -663,6 +663,12 @@ Thanks for your formal nomination of your LMS subject site. Your request will be
 </p>
 <hr/>
 <p>
+<strong>
+**Please ensure as a priority, that the assessment details for your subject are up to date and correct on the \"Assessment\" page in your LMS site. This must include the details of each assessment task, word length, specific due date & time, and the percentage each task is worth. Please also clearly indicate in your LMS if tutorials (where applicable) start in Week 1 or Week 2 of semester.**
+</strong>
+</p>
+<hr/>
+<p>
 Need help with your subject's LMS site? We are running LMS drop-in Help sessions. For dates and further information please see the <a href='http://staff.arts.unimelb.edu.au/eteaching'>Arts Faculty staff intranet</a>. There is no need to register for these sessions, staff are free to drop in for as long or short a time as they have available.
 </p>
 		";
