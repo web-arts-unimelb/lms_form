@@ -162,6 +162,7 @@ function _get_staff_info()
 /*
  * hook_url_inbound_alter
  */
+/*
 function lms_form_url_inbound_alter(&$path, $original_path, $path_language)
 {
 	global $user;	
@@ -177,24 +178,20 @@ function lms_form_url_inbound_alter(&$path, $original_path, $path_language)
 		}
 		else if(_does_user_complete_survey($user->name))
     {
-			/*
-				Run drush cron, if the still go to node/add/lmsform
-				Extra: 
-				https://drupal.org/node/1140842
-				https://drupal.org/node/1217668
-				http://drupal.stackexchange.com/questions/89977/how-to-programmatically-determine-if-the-cron-is-running
-			*/
+				//Run drush cron, if the still go to node/add/lmsform
+				//Extra: 
+				//https://drupal.org/node/1140842
+				//https://drupal.org/node/1217668
+				//http://drupal.stackexchange.com/questions/89977/how-to-programmatically-determine-if-the-cron-is-running
 
 			if(
 					!drupal_is_cli() || 
 					!preg_match('|^admin/reports/status/run-cron(/.*)?|', $path, $matches) ||
 					variable_get('cron_semaphore', FALSE) // cron is running 
 			) {
-				/*
 				//test
-				$msg = '<pre>'. print_r($path, TRUE). print_r($user, TRUE). '</pre>';
-				watchdog('lms_form 1', $msg);
-				*/
+				//$msg = '<pre>'. print_r($path, TRUE). print_r($user, TRUE). '</pre>';
+				//watchdog('lms_form 1', $msg);
 
 				// Go to the lms form
       	$the_path = "node/add/lmsform";
@@ -216,23 +213,19 @@ function lms_form_url_inbound_alter(&$path, $original_path, $path_language)
   	}
   	else
   	{
-			/*
-				Run drush cron, if the still go to node/add/lmsform
-        Extra: 
-        https://drupal.org/node/1140842
-        https://drupal.org/node/1217668
-        http://drupal.stackexchange.com/questions/89977/how-to-programmatically-determine-if-the-cron-is-running
-			*/
+				//Run drush cron, if the still go to node/add/lmsform
+        //Extra: 
+        //https://drupal.org/node/1140842
+        //https://drupal.org/node/1217668
+        //http://drupal.stackexchange.com/questions/89977/how-to-programmatically-determine-if-the-cron-is-running
 			if(
           !drupal_is_cli() || 
           !preg_match('|^admin/reports/status/run-cron(/.*)?|', $path, $matches) ||
 					variable_get('cron_semaphore', FALSE) // cron is running
       ) {
-				/*
 				//test
-        $msg = '<pre>'. print_r($path, TRUE). print_r($user, TRUE). '</pre>';
-        watchdog('lms_form 2', $msg);
-				*/	
+        //$msg = '<pre>'. print_r($path, TRUE). print_r($user, TRUE). '</pre>';
+        //watchdog('lms_form 2', $msg);
 
   			// Go to the survey 
   			$the_path = "node/add/lms-survey";
@@ -240,6 +233,46 @@ function lms_form_url_inbound_alter(&$path, $original_path, $path_language)
 			}
   	}
   }
+}
+*/
+
+
+// Hook_init
+function lms_form_init() {
+	global $user;
+
+	$path = current_path();
+
+	if(preg_match('|^node/add/lms-survey(/.*)?|', $path, $matches)) {
+		if(_does_user_complete_survey_is_admin($user->name)) {
+			// Stay in the survey
+		}
+		else if(_does_user_complete_survey($user->name)) {	
+			$the_path = "node/add/lmsform";
+      drupal_goto($the_path);
+		}
+		else
+    {
+      // Stay in the survey
+    }
+	}
+	else if(preg_match('|^node/add/lmsform(/.*)?|', $path, $matches)) {	
+		if(_does_user_complete_survey_is_admin($user->name)) {
+      // Stay in the lms_form 
+    }
+    else if(_does_user_complete_survey($user->name))
+    {
+      // Stay in lmsform
+    }
+    else
+    {
+    	// Go to the survey 
+      $the_path = "node/add/lms-survey";
+      drupal_goto($the_path);
+    }
+
+	}
+
 }
 
 
